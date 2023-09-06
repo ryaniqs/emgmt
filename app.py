@@ -16,7 +16,7 @@ def _show_map(center: List[float], zoom: int) -> folium.Map:
         location=center,
         zoom_start=zoom,
         control_scale=True,
-        tiles="https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
+        tiles="https://mts.maps.openstreetmap.org/ortho/{z}/{x}/{y}.png"  # changed the tiles to show hybrid imagery
         attr='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ...',  # shortened for brevity
     )
     Draw(
@@ -30,6 +30,8 @@ def _show_map(center: List[float], zoom: int) -> folium.Map:
             "marker": False,
             "circlemarker": False,
             "rectangle": True,
+            "max_width": 20000,
+            "max_height": 20000,
         },
     ).add_to(m)
     return m
@@ -41,6 +43,7 @@ def download_geojson(folium_output: dict) -> None:
             label="Download GeoJSON",
             data=json.dumps(geojson_data),
             file_name=f'{datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_map.geojson',
+            style=dict(font_size=20, color="blazeorange"),
         )
     else:
         st.sidebar.write("Please draw a rectangle on the map to enable GeoJSON download.")
@@ -54,8 +57,8 @@ if __name__ == "__main__":
 
     st.markdown(
         """
-        # IQSpatial's Area of Interest Application
-        Follow the instructions in the sidebar on the left to draw a rectangle of your area of interest and download the resulting area as a GeoJSON.
+        # Emergency Management Suite Area of Interest Application
+        Follow the instructions in the sidebar on the left to draw a rectangle of your area of interest and download the resulting area as a GeoJSON. The maximum area of the rectangle is 20 km squared.
         """
     )
     m = _show_map(center=[0, 0], zoom=2)  # changed to general world view
@@ -71,4 +74,9 @@ if __name__ == "__main__":
     )
     download_geojson(output)
 # Load image
-logo = st.sidebar.image("https://images.squarespace-cdn.com/content/v1/5e8cc689c426331984ffa7f1/1586545924842-ZUPOCD4I7SX1OGIBHDS3/Logo_IQSpatialLogo.png?format=1500w")
+logo = st.sidebar.image(
+    "https://images.squarespace-cdn.com/content/v1/5e8cc689c426331984ffa7f1/1586545924842-ZUPOCD4I7SX1OGIBHDS3/Logo_IQSpatialLogo.png?format=1500w",
+    width=150,
+    height=50,
+    link="https://iqspatial.com/",
+)
