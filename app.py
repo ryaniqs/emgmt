@@ -16,7 +16,7 @@ def _show_map(center: List[float], zoom: int) -> folium.Map:
         location=center,
         zoom_start=zoom,
         control_scale=True,
-        tiles="https://mts.maps.openstreetmap.org/ortho/{z}/{x}/{y}.png",  # Fixed tile URL format
+        tiles="https://mts.maps.openstreetmap.org/hybrid/{z}/{x}/{y}.png",  # Changed tile URL to show hybrid imagery
         attr='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     )
     Draw(
@@ -80,4 +80,4 @@ if __name__ == "__main__":
     download_geojson(output)
 
 # Load a smaller image (25 pixels) with a clickable link
-st.sidebar.markdown("[![IQSpatial Logo](https://images.squarespace-cdn.com/content/v1/5e8cc689c426331984ffa7f1/1586545924842-ZUPOCD4I7SX1OGIBHDS3/Logo_IQSpatialLogo.png?format=1500w =25x25)](https://iqspatial.com/)")
+st.sidebar.markdown("[![IQSpatial Logo](https://images.squarespace-cdn.com/content/v1/5e8cc689c426331984ffa7f1/1586545924842-ZUPOCD4I7SX1OGIBHDS3/Logo_IQSpatialLogo.png?format=25x25)](https://iqspatial.com/)")
