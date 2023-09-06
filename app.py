@@ -17,7 +17,7 @@ def _show_map(center: List[float], zoom: int) -> folium.Map:
         zoom_start=zoom,
         control_scale=True,
         tiles="https://mts.maps.openstreetmap.org/ortho/{z}/{x}/{y}.png"  # changed the tiles to show hybrid imagery
-        attr='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ...',  # shortened for brevity
+        attr='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ...'  # shortened for brevity
     )
     Draw(
         export=True,
@@ -57,7 +57,7 @@ if __name__ == "__main__":
 
     st.markdown(
         """
-        # Emergency Management Suite Area of Interest Application
+        # IQSpatial's Area of Interest Application
         Follow the instructions in the sidebar on the left to draw a rectangle of your area of interest and download the resulting area as a GeoJSON. The maximum area of the rectangle is 20 km squared.
         """
     )
