@@ -16,8 +16,8 @@ def _show_map(center: List[float], zoom: int) -> folium.Map:
         location=center,
         zoom_start=zoom,
         control_scale=True,
-        tiles="https://mts.maps.openstreetmap.org/hybrid/{z}/{x}/{y}.png",  # Changed tile URL to show hybrid imagery
-        attr='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        tiles="https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",  # Use Google Maps hybrid imagery
+        attr='Map data: &copy; <a href="https://www.google.com">Google</a>',
     )
     Draw(
         export=True,
@@ -43,9 +43,9 @@ def download_geojson(folium_output: dict) -> None:
             label="Download GeoJSON",
             data=json.dumps(geojson_data),
             file_name=f'{datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_map.geojson',
-            key="download_geojson",  # Added key to ensure the button updates
+            key="download_geojson",
             help="Download GeoJSON data",
-            on_click=None,  # Removed on_click, as it's not necessary in this context
+            on_click=None,
             args=(),
             kwargs={},
             disabled=False,
@@ -66,7 +66,7 @@ if __name__ == "__main__":
         Follow the instructions in the sidebar on the left to draw a rectangle of your area of interest and download the resulting area as a GeoJSON. The maximum area of the rectangle is 20 km squared.
         """
     )
-    m = _show_map(center=[0, 0], zoom=2)  # changed to general world view
+    m = _show_map(center=[0, 0], zoom=2)
     output = st_folium(m, key="init", width=1000, height=600)
 
     # Instructions
@@ -78,6 +78,3 @@ if __name__ == "__main__":
         """,
     )
     download_geojson(output)
-
-# Load a smaller image (25 pixels) with a clickable link
-st.sidebar.markdown("[![IQSpatial Logo](https://images.squarespace-cdn.com/content/v1/5e8cc689c426331984ffa7f1/1586545924842-ZUPOCD4I7SX1OGIBHDS3/Logo_IQSpatialLogo.png?format=25x25)](https://iqspatial.com/)")
