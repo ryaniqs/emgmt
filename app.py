@@ -16,7 +16,7 @@ def _show_map(center: List[float], zoom: int) -> folium.Map:
         location=center,
         zoom_start=zoom,
         control_scale=True,
-        tiles="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+        tiles="https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
         attr='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ...',  # shortened for brevity
     )
     Draw(
@@ -35,13 +35,15 @@ def _show_map(center: List[float], zoom: int) -> folium.Map:
     return m
 
 def download_geojson(folium_output: dict) -> None:
-    if folium_output and folium_output.get("last_draw"):
-        geojson_data = folium_output["last_draw"]
+    geojson_data = folium_output.get("last_draw") if folium_output else None
+    if geojson_data:
         st.sidebar.download_button(
             label="Download GeoJSON",
             data=json.dumps(geojson_data),
             file_name=f'{datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_map.geojson',
         )
+    else:
+        st.sidebar.write("Please draw a rectangle on the map to enable GeoJSON download.")
 
 if __name__ == "__main__":
     st.set_page_config(
