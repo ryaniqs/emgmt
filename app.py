@@ -62,7 +62,7 @@ if __name__ == "__main__":
 
     st.markdown(
         """
-        # IQSpatial's Area of Interest Application
+        # Area of Interest  Selection
         Follow the instructions in the sidebar on the left to draw a rectangle of your area of interest and download the resulting area as a GeoJSON. The maximum area of the rectangle is 20 km squared.
         """
     )
@@ -74,7 +74,8 @@ if __name__ == "__main__":
         """
         ## Instructions:
         1. Use the rectangle tool to draw an area on the map.
-        2. Click the download button to get the GeoJSON.
+        2. Click the blue "Export" link below the map to downlowd the GeoJSON File.
+        3. Rename the file as needed and email to IQSpatial for feature extraction. 
         """,
     )
     download_geojson(output)
