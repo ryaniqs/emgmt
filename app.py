@@ -63,7 +63,7 @@ if __name__ == "__main__":
     st.markdown(
         """
         # Area of Interest  Selection
-        Follow the instructions in the sidebar on the left to draw a rectangle of your area of interest and download the resulting area as a GeoJSON. The maximum area of the rectangle is 20 km squared.
+        Follow the instructions in the sidebar on the left to draw a rectangle of your area of interest and download the resulting area as a GeoJSON. The maximum area of the rectangle is 20 km2/ 7.7 mi2.
         """
     )
     m = _show_map(center=[0, 0], zoom=2)
