@@ -6,6 +6,7 @@ import folium
 import streamlit as st
 from folium.plugins import Draw
 from streamlit_folium import st_folium
+from typing import List
 
 log = logging.getLogger(__name__)
 log.setLevel(os.getenv("LOG_LEVEL", "DEBUG"))
@@ -15,11 +16,11 @@ def _show_map(center: List[float], zoom: int) -> folium.Map:
         location=center,
         zoom_start=zoom,
         control_scale=True,
-        tiles="https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",  # This tileset is for Google Satellite
-        attr='Imagery © <a href="https://www.google.com/earth/">Google Earth</a>'
+        tiles="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+        attr='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ...',  # shortened for brevity
     )
     Draw(
-        export=True,
+        export=False,
         position="topleft",
         draw_options={
             "polyline": False,
