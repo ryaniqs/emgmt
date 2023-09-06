@@ -4,7 +4,7 @@ import json
 import logging
 import folium
 import streamlit as st
-from folium.plugins.draw import Draw
+from folium.plugins import Draw
 from streamlit_folium import st_folium
 from typing import List
 
