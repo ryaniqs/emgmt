@@ -79,5 +79,5 @@ if __name__ == "__main__":
     )
     download_geojson(output)
 
-# Load a smaller image with a clickable link
-st.sidebar.image("https://images.squarespace-cdn.com/content/v1/5e8cc689c426331984ffa7f1/1586545924842-ZUPOCD4I7SX1OGIBHDS3/Logo_IQSpatialLogo.png?format=1500w", width=100, use_container_width=False, link="https://iqspatial.com/")
+# Load a smaller image (25 pixels) with a clickable link
+st.sidebar.markdown("[![IQSpatial Logo](https://images.squarespace-cdn.com/content/v1/5e8cc689c426331984ffa7f1/1586545924842-ZUPOCD4I7SX1OGIBHDS3/Logo_IQSpatialLogo.png?format=1500w =25x25)](https://iqspatial.com/)")
