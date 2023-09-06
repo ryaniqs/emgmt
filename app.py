@@ -39,6 +39,12 @@ def _show_map(center: List[float], zoom: int) -> folium.Map:
 def download_geojson(folium_output: dict) -> None:
     geojson_data = folium_output.get("last_draw") if folium_output else None
     if geojson_data:
+        crs = st.selectbox(
+            "Select the CRS of the GeoJSON:",
+            ["EPSG:4326", "EPSG:3857", "EPSG:3978"],
+            index=0,
+        )
+        st.write(f"The selected CRS is: {crs}")
         st.sidebar.download_button(
             label="Download GeoJSON",
             data=json.dumps(geojson_data),
@@ -47,7 +53,7 @@ def download_geojson(folium_output: dict) -> None:
             help="Download GeoJSON data",
             on_click=None,
             args=(),
-            kwargs={},
+            kwargs={"crs": crs},
             disabled=False,
         )
     else:
@@ -81,4 +87,4 @@ if __name__ == "__main__":
     download_geojson(output)
 
 # Load a smaller image (25 pixels) with a clickable link
-st.sidebar.markdown("[![IQSpatial Logo](https://images.squarespace-cdn.com/content/v1/5e8cc689c426331984ffa7f1/1586545924842-ZUPOCD4I7SX1OGIBHDS3/Logo_IQSpatialLogo.png?format=25x25)](https://iqspatial.com/)")
+st.sidebar.markdown("[![IQSpatial Logo](https://images.squarespace-cdn.com/content/v1/5e8cc689c426331984ffa7f1/1586545924842-ZUPOCD4I7SX1OGIBHDS3/Logo_IQSpatialLogo.png?format=25x25)](https
