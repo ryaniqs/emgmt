@@ -54,8 +54,8 @@ if __name__ == "__main__":
 
     st.markdown(
         """
-        # Map to GeoJSON Converter
-        Follow the instructions in the sidebar on the left to draw a rectangle and download the resulting GeoJSON.
+        # IQSpatial's Area of Interest Application
+        Follow the instructions in the sidebar on the left to draw a rectangle of your area of interest and download the resulting area as a GeoJSON.
         """
     )
     m = _show_map(center=[0, 0], zoom=2)  # changed to general world view
