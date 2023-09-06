@@ -1,6 +1,5 @@
 import datetime
 import os
-from typing import List
 import json
 import logging
 import folium
@@ -16,11 +15,11 @@ def _show_map(center: List[float], zoom: int) -> folium.Map:
         location=center,
         zoom_start=zoom,
         control_scale=True,
-        tiles="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
-        attr='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ...',  # shortened for brevity
+        tiles="https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",  # This tileset is for Google Satellite
+        attr='Imagery © <a href="https://www.google.com/earth/">Google Earth</a>'
     )
     Draw(
-        export=False,
+        export=True,
         position="topleft",
         draw_options={
             "polyline": False,
