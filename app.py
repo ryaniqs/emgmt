@@ -16,8 +16,8 @@ def _show_map(center: List[float], zoom: int) -> folium.Map:
         location=center,
         zoom_start=zoom,
         control_scale=True,
-        tiles="https://mts.maps.openstreetmap.org/ortho/{z}/{x}/{y}.png"  # changed the tiles to show hybrid imagery
-        attr='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>')
+        tiles="https://mts.maps.openstreetmap.org/ortho/{z}/{x}/{y}.png",  # Fixed missing comma
+        attr='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     )
     Draw(
         export=True,
@@ -70,9 +70,10 @@ if __name__ == "__main__":
         ## Instructions:
         1. Use the rectangle tool to draw an area on the map.
         2. Click the download button to get the GeoJSON.
-        """,
+        """
     )
     download_geojson(output)
+
 # Load image
 logo = st.sidebar.image(
     "https://images.squarespace-cdn.com/content/v1/5e8cc689c426331984ffa7f1/1586545924842-ZUPOCD4I7SX1OGIBHDS3/Logo_IQSpatialLogo.png?format=1500w",
