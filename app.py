@@ -16,7 +16,7 @@ def _show_map(center: List[float], zoom: int) -> folium.Map:
         location=center,
         zoom_start=zoom,
         control_scale=True,
-        tiles="https://mts.maps.openstreetmap.org/ortho/{z}, {x}, {y}.png",  # Fixed missing comma
+        tiles="https://mts.maps.openstreetmap.org/ortho/{z}/{x}/{y}.png",  # Fixed tile URL format
         attr='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     )
     Draw(
@@ -43,7 +43,12 @@ def download_geojson(folium_output: dict) -> None:
             label="Download GeoJSON",
             data=json.dumps(geojson_data),
             file_name=f'{datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_map.geojson',
-            style=dict(font_size=20, color="blazeorange"),
+            key="download_geojson",  # Added key to ensure the button updates
+            help="Download GeoJSON data",
+            on_click=None,  # Removed on_click, as it's not necessary in this context
+            args=(),
+            kwargs={},
+            disabled=False,
         )
     else:
         st.sidebar.write("Please draw a rectangle on the map to enable GeoJSON download.")
