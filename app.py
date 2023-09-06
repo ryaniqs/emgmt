@@ -92,4 +92,4 @@ if __name__ == "__main__":
     download_geojson(output)
 
 # Load a smaller image (25 pixels) with a clickable link
-st.sidebar.markdown("[![IQSpatial Logo](https://images.squarespace-cdn.com/content/v1/5e8cc689c426331984ffa7
+st.sidebar.markdown("[![IQSpatial Logo](https://images.squarespace-cdn.com/content/v1/5e8cc689c426331984ffa7f1/1586545924842-ZUPOCD4I7SX1OGIBHDS3/Logo_IQSpatialLogo.png?format=25x25)](https://iqspatial.com/)")
