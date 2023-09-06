@@ -13,9 +13,17 @@ def create_shapefile(geo_json_data, output_folder="output"):
     
     # Convert GeoJSON to Geopandas DataFrame
     gdf = gpd.GeoDataFrame({'geometry': [shape(geo_json_data['features'][0]['geometry'])]})
-
+    
     # Export to Shapefile
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
     gdf.to_file(os.path.join(output_folder, "shapefile"))
+
+    # Zip the shapefile components for easy download
+    zipf = zipfile.ZipFile('shapefile.zip', 'w', zipfile.ZIP_DEFLATED)
+    zipdir(output_folder, zipf)
+    zipf.close()
+    shutil.rmtree(output_folder)  # Clean up the directory after zipping
 
 def zipdir(path, ziph):
     """Zip contents of the directory."""
@@ -36,17 +44,17 @@ def main():
 
     if geo_json_data:
         create_shapefile(geo_json_data)
-        
-        # Zip the shapefile components for easy download
-        zipf = zipfile.ZipFile('shapefile.zip', 'w', zipfile.ZIP_DEFLATED)
-        zipdir('output', zipf)
-        zipf.close()
-
         st.markdown("[Download Shapefile](shapefile.zip)")
+        st.session_state.geo_json = None  # Reset the session state
 
-    draw_data = st.text_area("GeoJSON Data", value="")
+    draw_data = st.text_area("GeoJSON Data", value="", key="geo_data")
     if draw_data:
         st.session_state.geo_json = eval(draw_data)
+
+        if st.button("OK"):
+            create_shapefile(st.session_state.geo_json)
+            st.markdown("[Download Shapefile](shapefile.zip)")
+            st.session_state.geo_json = None  # Reset the session state
 
 if __name__ == "__main__":
     main()
