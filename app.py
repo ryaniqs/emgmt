@@ -4,7 +4,7 @@ import json
 import logging
 import folium
 import streamlit as st
-from folium.plugins import Draw
+from folium.plugins.draw import Draw
 from streamlit_folium import st_folium
 from typing import List
 
@@ -80,8 +80,8 @@ if __name__ == "__main__":
         """
         ## Instructions:
         1. Use the rectangle tool to draw an area on the map.
-        2. Click the blue "Export" link below the map to downlowd the GeoJSON File.
-        3. Rename the file as needed and email to IQSpatial for feature extraction. 
+        2. Click the blue "Export" link below the map to download the GeoJSON File.
+        3. Rename the file as needed and email it to IQSpatial for feature extraction. 
         """,
     )
     download_geojson(output)
