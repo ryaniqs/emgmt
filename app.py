@@ -20,7 +20,7 @@ def _show_map(center: List[float], zoom: int) -> folium.Map:
         attr='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ...',  # shortened for brevity
     )
     Draw(
-        export=False,
+        export=True,
         position="topleft",
         draw_options={
             "polyline": False,
