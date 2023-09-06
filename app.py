@@ -17,7 +17,7 @@ def _show_map(center: List[float], zoom: int) -> folium.Map:
         zoom_start=zoom,
         control_scale=True,
         tiles="https://mts.maps.openstreetmap.org/ortho/{z}/{x}/{y}.png"  # changed the tiles to show hybrid imagery
-        attr='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        attr='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>')
     )
     Draw(
         export=True,
