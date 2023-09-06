@@ -16,7 +16,7 @@ def _show_map(center: List[float], zoom: int) -> folium.Map:
         location=center,
         zoom_start=zoom,
         control_scale=True,
-        tiles="https://mts.maps.openstreetmap.org/ortho/{z}/{x}/{y}.png",  # Fixed missing comma
+        tiles="https://mts.maps.openstreetmap.org/ortho/{z}, {x}, {y}.png",  # Fixed missing comma
         attr='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     )
     Draw(
@@ -70,7 +70,7 @@ if __name__ == "__main__":
         ## Instructions:
         1. Use the rectangle tool to draw an area on the map.
         2. Click the download button to get the GeoJSON.
-        """
+        """,
     )
     download_geojson(output)
 
