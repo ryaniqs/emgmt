@@ -51,7 +51,7 @@ def download_geojson(folium_output: dict) -> None:
             disabled=False,
         )
     else:
-        st.sidebar.write("Please draw a rectangle on the map to enable GeoJSON download.")
+        st.sidebar.write("Please zoom to your AOI and draw a rectangle on the map to enable GeoJSON download.")
 
 if __name__ == "__main__":
     st.set_page_config(
