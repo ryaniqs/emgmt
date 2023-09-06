@@ -83,6 +83,5 @@ if __name__ == "__main__":
 logo = st.sidebar.image(
     "https://images.squarespace-cdn.com/content/v1/5e8cc689c426331984ffa7f1/1586545924842-ZUPOCD4I7SX1OGIBHDS3/Logo_IQSpatialLogo.png?format=1500w",
     width=150,
-    height=50,
     link="https://iqspatial.com/",
 )
