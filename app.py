@@ -1,16 +1,70 @@
-# app.py
+import datetime
+import os
+from typing import List
+import json
+
+import folium
 import streamlit as st
+from folium.plugins import Draw
+from streamlit_folium import st_folium
 
-def main():
-    st.title("Streamlit app with geojson.io")
+log = logging.getLogger(__name__)
+log.setLevel(os.getenv("LOG_LEVEL", "DEBUG"))
 
-    # Create an iframe that embeds geojson.io
-    iframe_code = '<iframe src="http://geojson.io" width="100%" height="600px"></iframe>'
-    st.markdown(iframe_code, unsafe_allow_html=True)
+def _show_map(center: List[float], zoom: int) -> folium.Map:
+    m = folium.Map(
+        location=center,
+        zoom_start=zoom,
+        control_scale=True,
+        tiles="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+        attr='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ...',  # shortened for brevity
+    )
+    Draw(
+        export=False,
+        position="topleft",
+        draw_options={
+            "polyline": False,
+            "poly": False,
+            "circle": False,
+            "polygon": False,
+            "marker": False,
+            "circlemarker": False,
+            "rectangle": True,
+        },
+    ).add_to(m)
+    return m
 
-    st.write("""
-    Above is an embedded version of geojson.io. You can draw, edit, and export GeoJSON directly from this interface.
-    """)
+def download_geojson(folium_output: dict) -> None:
+    if folium_output and folium_output.get("last_draw"):
+        geojson_data = folium_output["last_draw"]
+        st.sidebar.download_button(
+            label="Download GeoJSON",
+            data=json.dumps(geojson_data),
+            file_name=f'{datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_map.geojson',
+        )
 
 if __name__ == "__main__":
-    main()
+    st.set_page_config(
+        page_title="mapa",
+        layout="wide",
+        initial_sidebar_state="expanded",
+    )
+
+    st.markdown(
+        """
+        # Map to GeoJSON Converter
+        Follow the instructions in the sidebar on the left to draw a rectangle and download the resulting GeoJSON.
+        """
+    )
+    m = _show_map(center=[0, 0], zoom=2)  # changed to general world view
+    output = st_folium(m, key="init", width=1000, height=600)
+
+    # Instructions
+    st.sidebar.markdown(
+        """
+        ## Instructions:
+        1. Use the rectangle tool to draw an area on the map.
+        2. Click the download button to get the GeoJSON.
+        """,
+    )
+    download_geojson(output)
